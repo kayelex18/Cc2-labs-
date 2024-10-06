@@ -1,0 +1,200 @@
+LAB 4
+// Clauren, Kaye alexia R.
+// October 06 2024
+// title Grocery Discount caclulator
+import java.util.Scanner;
+
+public class GroceryDiscountCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Input: Ask user for the total purchase amount
+        System.out.print("Enter the total purchase amount: PHP ");
+        double totalAmount = scanner.nextDouble();
+        
+        // Initialize discount percentage and final price
+        double discount = 0.0;
+        double finalPrice = totalAmount;
+        
+        // Calculate the discount based on the purchase amount
+        if (totalAmount >= 1000 && totalAmount <= 5000) {
+            discount = 0.05; // 5% discount
+        } else if (totalAmount > 5000 && totalAmount <= 10000) {
+            discount = 0.10; // 10% discount
+        } else if (totalAmount > 10000) {
+            discount = 0.15; // 15% discount
+        }
+        
+        // Apply the discount to the total purchase amount
+        finalPrice = totalAmount - (totalAmount * discount);
+        
+        // Output: Display the discount and the final price
+        if (discount > 0) {
+            System.out.println("Discount applied: " + (int)(discount * 100) + "%");
+        } else {
+            System.out.println("No discount applied.");
+        }
+        
+        System.out.println("Final price after discount: PHP " + finalPrice);
+    }
+}
+
+LAB 5
+// Clauren, Kaye alexia R.
+// October 06 2024
+// title: Restaurant order system 
+import java.util.Scanner;
+
+public class RestaurantOrderSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int menuChoice, quantity;
+        double totalAmount = 0;
+
+        while (true) {
+            // Display the menu
+            System.out.println("MENU");
+            System.out.println("1. Burger    - PHP 100");
+            System.out.println("2. Fries     - PHP  50");
+            System.out.println("3. Soda      - PHP  30");
+            System.out.println("4. Ice Cream - PHP  45");
+            System.out.println("5. Exit");
+            System.out.print("Enter the menu number of your choice: ");
+            
+            // Get the user's menu choice
+            menuChoice = scanner.nextInt();
+
+            // Exit if the user chooses 5
+            if (menuChoice == 5) {
+                System.out.println("Thank you for visiting!");
+                break;
+            }
+
+            // Get the quantity of the selected item
+            System.out.print("Enter the quantity: ");
+            quantity = scanner.nextInt();
+
+            // Process the user's selection using a switch statement
+            switch (menuChoice) {
+                case 1:
+                    totalAmount = 100 * quantity;
+                    System.out.println("You ordered Burger.");
+                    break;
+                case 2:
+                    totalAmount = 50 * quantity;
+                    System.out.println("You ordered Fries.");
+                    break;
+                case 3:
+                    totalAmount = 30 * quantity;
+                    System.out.println("You ordered Soda.");
+                    break;
+                case 4:
+                    totalAmount = 45 * quantity;
+                    System.out.println("You ordered Ice Cream.");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose a valid menu number.");
+                    continue; // Skip the rest and re-prompt for a valid input
+            }
+
+            // Display the total amount
+            System.out.println("Total amount: PHP " + totalAmount);
+        }
+    }
+}
+
+LAB 6
+// Clauren, Kaye alexia R.
+// October 06 2024
+// title Attendance system 
+import java.util.Scanner;
+
+public class AttendanceSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Step 1: Input the total number of students
+        System.out.print("Enter the total number of students: ");
+        int totalStudents = scanner.nextInt();
+
+        // Initialize counters for present and absent students
+        int presentCount = 0;
+        int absentCount = 0;
+
+        // Step 2: Loop through each student and ask if they are present or absent
+        for (int i = 1; i <= totalStudents; i++) {
+            System.out.print("Is student " + i + " present? (Y/N): ");
+            char attendance = scanner.next().charAt(0);
+
+            // Step 3: Count present or absent based on user input
+            if (attendance == 'Y' || attendance == 'y') {
+                presentCount++;
+            } else if (attendance == 'N' || attendance == 'n') {
+                absentCount++;
+            } else {
+                System.out.println("Invalid input, please enter 'Y' or 'N'.");
+                i--; // Repeat the question for the same student if the input is invalid
+            }
+        }
+
+        // Step 4: Display the final counts of present and absent students
+        System.out.println("Total present: " + presentCount);
+        System.out.println("Total absent: " + absentCount);
+    }
+}
+
+
+LAB 7
+// Clauren, Kaye alexia R.
+// October 06 2024
+// title: Password validation system 
+import java.util.Scanner;
+
+public class PasswordValidationSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String password;
+
+        while (true) {
+            // Step 1: Ask the user to input a password
+            System.out.print("Enter your password: ");
+            password = scanner.nextLine();
+
+            // Step 2: Check if the password meets the required criteria
+            if (isValidPassword(password)) {
+                // Step 3: If the password is valid, confirm and exit
+                System.out.println("Your password is valid!");
+                break;
+            } else {
+                // Step 4: If the password is invalid, show error message and ask again
+                System.out.println("Password must contain at least 8 characters, including one uppercase letter and one number.");
+            }
+        }
+    }
+
+    // Method to validate the password
+    public static boolean isValidPassword(String password) {
+        // Check if the password is at least 8 characters long
+        if (password.length() < 8) {
+            return false;
+        }
+
+        // Check if the password contains at least one digit
+        boolean hasNumber = false;
+        boolean hasUppercase = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            char ch = password.charAt(i);
+            if (Character.isDigit(ch)) {
+                hasNumber = true;
+            }
+            if (Character.isUpperCase(ch)) {
+                hasUppercase = true;
+            }
+        }
+
+        // The password is valid if it contains a number and an uppercase letter
+        return hasNumber && hasUppercase;
+    }
+}
+	
