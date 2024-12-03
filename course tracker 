@@ -1,0 +1,35 @@
+public class CC2CourseTracker {
+    public static void main(String[] args) {
+        // Step 1: Create a one-dimensional array to store the names of 5 students.
+        String[] students = {"Darla", "Jabi", "Yen", "Jisi", "Naneng"};
+        
+        // Step 2: Create a two-dimensional array to store the grades of each student in 3 subjects.
+        // Rows represent students, and columns represent subjects (3 subjects in this case).
+        int[][] grades = {
+            {85, 90, 88},  // Daryll's' grades in 3 subjects
+            {78, 82, 84},  // Jabi's' grades
+            {92, 95, 93},  // Yen'sgrades
+            {70, 75, 80},  // Jisi's grades
+            {88, 92, 90}   // Naneng's grades
+        };
+
+        // Step 3: Calculate and display the average grade for each student.
+        for (int i = 0; i < students.length; i++) {
+            String student = students[i];
+            int[] studentGrades = grades[i];
+            double average = calculateAverage(studentGrades);
+            
+            // Format the average to 3 decimal places using String.format
+            System.out.println(student + "'s Average Grade: " + String.format("%.2f", average));
+        }
+    }
+
+    // Method to calculate the average of grades for a student
+    public static double calculateAverage(int[] grades) {
+        int total = 0;
+        for (int grade : grades) {
+            total += grade;
+        }
+        return (double) total / grades.length;
+    }
+}
