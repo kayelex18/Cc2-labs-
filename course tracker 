@@ -1,3 +1,6 @@
+//Claure, Kaye alexia R
+//CC2
+// COURSE TRACKER
 public class CC2CourseTracker {
     public static void main(String[] args) {
         // Step 1: Create a one-dimensional array to store the names of 5 students.
