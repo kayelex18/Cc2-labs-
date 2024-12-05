@@ -1,3 +1,7 @@
+//Claure, Kaye alexia R
+//CC2
+//FINAL CHALLENGE 7
+
 class Node {
     String url;
     Node prev;
