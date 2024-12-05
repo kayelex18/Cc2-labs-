@@ -1,0 +1,24 @@
+public class Invoice {
+    public static void main(String[] args) {
+        // Store Information
+        System.out.println("\"Kayelex's Store\"\nAmparo Heights");
+		
+		// Itemized List
+		System.out.println("Item\tQuantity\tPrice");
+		System.out.println("______________________________________");
+		System.out.println("T-shirt\t\t1\t\t£320");
+	    System.out.println("Pants\t\t2\t\t£370");//correct quantity
+	    System.out.println("Jacket\t\t4\t\t£900");
+	     System.out.println("Socks\t\t10\t\t£500");//corrected quantity
+	 	System.out.println("______________________________________");
+	     
+	    //Totall Amount
+	    System.out.println("Total: ");
+	    System.out.println("£1,590");//corrected to use print and println
+	    
+	    //Additonal Notes
+	    	System.out.println("________________________________________");
+	    System.out.println("\nThank you for shoping at \"Kayelex's Store!\"");//correct spelling
+	 	System.out.println("______________________________________");
+	}
+}
