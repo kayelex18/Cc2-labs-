@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class RetailInventoryManagement {
+    public static void main(String[] args) {
+        final int NUM_PRODUCTS = 10;
+
+        // Initialize arrays to store stock levels and prices
+        int[] stockLevels = new int[NUM_PRODUCTS];
+        double[] prices = new double[NUM_PRODUCTS];
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Collect user input for stock levels and prices
+        for (int i = 0; i < NUM_PRODUCTS; i++) {
+            System.out.print("Enter stock level for product " + (i + 1) + ": ");
+            stockLevels[i] = scanner.nextInt();
+            System.out.print("Enter price for product " + (i + 1) + ": ");
+            prices[i] = scanner.nextDouble();
+        }
+
+        // Calculate the total value of all items in stock
+        double totalValue = 0.0;
+        for (int i = 0; i < NUM_PRODUCTS; i++) {
+            totalValue += stockLevels[i] * prices[i];
+        }
+
+        // Print the total value of all items in stock
+        System.out.printf("Total value of all items in stock: $%.2f%n", totalValue);
+
+        // Calculate and print additional statistics
+        double averageValue = totalValue / NUM_PRODUCTS;
+        System.out.printf("Average value of all items in stock: $%.2f%n", averageValue);
+
+        int highestValueProductIndex = 0;
+        int lowestValueProductIndex = 0;
+        double highestValue = stockLevels[0] * prices[0];
+        double lowestValue = highestValue;
+
+        for (int i = 1; i < NUM_PRODUCTS; i++) {
+            double productValue = stockLevels[i] * prices[i];
+            if (productValue > highestValue) {
+                highestValue = productValue;
+                highestValueProductIndex = i;
+            }
+            if (productValue < lowestValue) {
+                lowestValue = productValue;
+                lowestValueProductIndex = i;
+            }
+        }
+
+        System.out.printf("Highest value product: Product %d with a value of $%.2f%n", highestValueProductIndex + 1, highestValue);
+        System.out.printf("Lowest value product: Product %d with a value of $%.2f%n", lowestValueProductIndex + 1, lowestValue);
+
+        scanner.close();
+    }
+}
