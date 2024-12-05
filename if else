@@ -1,0 +1,34 @@
+/*
+Clauren, Kaye alexia R.
+September 25, 2024
+If else-id: Determines the largest number 
+*/
+
+
+import java.util.Scanner;
+
+public class ElifSimple {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        int fNum, sNum, tNum;
+
+        System.out.println("Input first number: ");
+        fNum = input.nextInt();
+
+        System.out.println("Input second number: ");
+        sNum = input.nextInt();
+
+        System.out.println("Input third number: ");
+        tNum = input.nextInt();
+
+        if (fNum > sNum && fNum > tNum) {
+            System.out.println(fNum + " is the largest number.");
+        } else if (sNum > fNum && sNum > tNum) {
+            System.out.println(sNum + " is the largest number.");
+        } else {
+            System.out.println(tNum + " is the largest number.");
+        }
+    }
