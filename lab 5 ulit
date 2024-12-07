@@ -47,20 +47,55 @@ public class FlightBookingSystem {
                     } catch (NoSeatsAvailableException e) {
                         // Handle the case when no seats are available
                         System.out.println(e.getMessage());
-                    }
-                    break;
-                case 2:
-                    // Display the number of available seats
-                    System.out.println("Available seats: " + flight.getAvailableSeats());
-                    break;
-                case 3:
-                    // Exit the program
-                    System.out.println("Thank you for using the Flight Booking System. Goodbye!");
-                    scanner.close();
-                    return;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-            }
-        }
+   }
+
+
+
+
+final
+import java.util.Scanner;
+
+// Custom Exception to handle the case when no seats are available
+class NoSeatsAvailableException extends Exception {
+    public NoSeatsAvailableException(String message) {
+        super(message); // Pass the error message to the parent Exception class
     }
 }
+
+// Flight class to represent a flight and manage bookings
+class Flight {
+    private int availableSeats; // Number of available seats
+
+    // Constructor to initialize the flight with available seats
+    public Flight(int totalSeats) {
+        this.availableSeats = totalSeats;
+    }
+
+    // Method to book a seat
+    public void bookSeat() throws NoSeatsAvailableException {
+        if (availableSeats > 0) {
+            availableSeats--;  // Decrease available seats by 1 after a successful booking
+            System.out.println("Seat successfully booked. Seats remaining: " + availableSeats);
+        } else {
+            // Throw custom exception if no seats are available
+            throw new NoSeatsAvailableException("Sorry, no seats are available on this flight.");
+        }
+    }
+
+    // Method to check the number of available seats
+    public int getAvailableSeats() {
+        return availableSeats; // Return the current number of available seats
+    }
+}
+
+// Main class to simulate the flight booking process
+public class FlightBookingSystem {
+    private static final Scanner scanner = new Scanner(System.in); // Scanner for user input
+
+    public static void main(String[] args) {
+        // Create a flight with 5 available seats
+        Flight flight = new Flight(5);
+        System.out.println("Welcome to the Flight Booking System!");
+
+        // Infinite loop for booking system menu
+ 
