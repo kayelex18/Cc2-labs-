@@ -8,40 +8,74 @@ public class CourseEnrollmentTracker {
         final int NUM_STUDENTS = 5;  // Number of students
         final int NUM_SUBJECTS = 3;  // Number of subjects
 
-        // Arrays for storing student names and grades
+        // Arrays for storing student names, grades, and final scores
         String[] studentNames = new String[NUM_STUDENTS];  // Array for student names
         double[][] grades = new double[NUM_STUDENTS][NUM_SUBJECTS];  // 2D array for student grades
+        double[] finalScores = new double[NUM_STUDENTS];  // Array for final scores
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner for user input
 
         // Input student names
         for (int i = 0; i < NUM_STUDENTS; i++) {
             System.out.print("Enter the name of Student " + (i + 1) + ": ");
-            studentNames[i] = scanner.nextLine();  // Read the student's name from input
+            studentNames[i] = scanner.nextLine();  // Read the student's name
         }
 
         // Input grades for each student in each subject
         for (int i = 0; i < NUM_STUDENTS; i++) {
             System.out.println("Enter grades for " + studentNames[i] + ":");
 
+            double sum = 0.0;  // Initialize the total grades for the student
+
             for (int j = 0; j < NUM_SUBJECTS; j++) {
                 System.out.print("Grade for Subject " + (j + 1) + ": ");
-                grades[i][j] = scanner.nextDouble();  // Read the grade from input
+                grades[i][j] = scanner.nextDouble();  // Read the grade
+                sum += grades[i][j];  // Add the grade to the total
             }
 
             scanner.nextLine();  // Consume the newline character after double input
+
+            // Calculate and store the final score (average grade)
+            finalScores[i] = sum / NUM_SUBJECTS;
         }
 
-        // Calculate and display the average grade for each student
+        // Display the results
+        System.out.println("\nFinal Scores:");
+        System.out.println("====================================");
         for (int i = 0; i < NUM_STUDENTS; i++) {
-            double sum = 0.0;  // Variable to store the total grades for the student
+            System.out.printf("Student: %s | Final Score: %.2f%n", studentNames[i], finalScores[i]);
+        }
+
+        scanner.close();  // Close the Scanner to free resources
+    }
+}
+ ": ");
+            studentNames[i] = scanner.nextLine();  // Read the student's name
+        }
+
+        // Input grades for each student in each subject
+        for (int i = 0; i < NUM_STUDENTS; i++) {
+            System.out.println("Enter grades for " + studentNames[i] + ":");
+
+            double sum = 0.0;  // Initialize the total grades for the student
 
             for (int j = 0; j < NUM_SUBJECTS; j++) {
-                sum += grades[i][j];  // Sum the grades for the student
+                System.out.print("Grade for Subject " + (j + 1) + ": ");
+                grades[i][j] = scanner.nextDouble();  // Read the grade
+                sum += grades[i][j];  // Add the grade to the total
             }
 
-            double average = sum / NUM_SUBJECTS;  // Calculate the average grade
-            System.out.printf("Average grade for %s: %.2f%n", studentNames[i], average);  // Display the result
+            scanner.nextLine();  // Consume the newline character after double input
+
+            // Calculate and store the final score (average grade)
+            finalScores[i] = sum / NUM_SUBJECTS;
+        }
+
+        // Display the results
+        System.out.println("\nFinal Scores:");
+        System.out.println("====================================");
+        for (int i = 0; i < NUM_STUDENTS; i++) {
+            System.out.printf("Student: %s | Final Score: %.2f%n", studentNames[i], finalScores[i]);
         }
 
         scanner.close();  // Close the Scanner to free resources
