@@ -49,35 +49,3 @@ public class CourseEnrollmentTracker {
         scanner.close();  // Close the Scanner to free resources
     }
 }
- ": ");
-            studentNames[i] = scanner.nextLine();  // Read the student's name
-        }
-
-        // Input grades for each student in each subject
-        for (int i = 0; i < NUM_STUDENTS; i++) {
-            System.out.println("Enter grades for " + studentNames[i] + ":");
-
-            double sum = 0.0;  // Initialize the total grades for the student
-
-            for (int j = 0; j < NUM_SUBJECTS; j++) {
-                System.out.print("Grade for Subject " + (j + 1) + ": ");
-                grades[i][j] = scanner.nextDouble();  // Read the grade
-                sum += grades[i][j];  // Add the grade to the total
-            }
-
-            scanner.nextLine();  // Consume the newline character after double input
-
-            // Calculate and store the final score (average grade)
-            finalScores[i] = sum / NUM_SUBJECTS;
-        }
-
-        // Display the results
-        System.out.println("\nFinal Scores:");
-        System.out.println("====================================");
-        for (int i = 0; i < NUM_STUDENTS; i++) {
-            System.out.printf("Student: %s | Final Score: %.2f%n", studentNames[i], finalScores[i]);
-        }
-
-        scanner.close();  // Close the Scanner to free resources
-    }
-}
