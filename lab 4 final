@@ -1,0 +1,177 @@
+// Clauren , Kwye alexia R 
+// CC2 B
+// Music Playlist Manager
+
+
+import java.util.Scanner;
+
+// SongNode class represents a node in the doubly linked list
+class SongNode {
+    String songName;
+    SongNode next;
+    SongNode prev;
+
+    // Constructor to initialize the song node with a song name
+    public SongNode(String songName) {
+        this.songName = songName;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+// PlaylistManager class to manage the playlist and perform operations
+public class PlaylistManager {
+    private SongNode currentSong;  // The current song being played
+    private int size;             // Number of songs in the playlist
+
+    // Constructor to initialize the playlist manager
+    public PlaylistManager() {
+        this.currentSong = null;
+        this.size = 0;
+    }
+
+    // Add a song to the playlist
+    public void addSong(String songName) {
+        SongNode newSong = new SongNode(songName);
+
+        if (size == 0) {
+            // If the playlist is empty, make the new song both the head and tail
+            currentSong = newSong;
+            currentSong.next = currentSong;
+            currentSong.prev = currentSong;
+        } else {
+            // Insert the new song after the current song
+            SongNode lastSong = currentSong.prev;
+            lastSong.next = newSong;
+            newSong.prev = lastSong;
+            newSong.next = currentSong;
+            currentSong.prev = newSong;
+        }
+
+        size++;
+        System.out.println("Song added: " + songName);
+    }
+
+    // Remove a song from the playlist
+    public void removeSong(String songName) {
+        if (size == 0) {
+            System.out.println("Playlist is empty. No song to remove.");
+            return;
+        }
+
+        SongNode current = currentSong;
+        do {
+            if (current.songName.equals(songName)) {
+                // If the song to be removed is the only one in the playlist
+                if (size == 1) {
+                    currentSong = null;
+                } else {
+                    // Update the previous and next pointers to remove the current song
+                    current.prev.next = current.next;
+                    current.next.prev = current.prev;
+
+                    // If the song to be removed is the current song, move to the next song
+                    if (current == currentSong) {
+                        currentSong = current.next;
+                    }
+                }
+                size--;
+                System.out.println("Song '" + songName + "' removed.");
+                return;
+            }
+            current = current.next;
+        } while (current != currentSong);  // Loop through the list
+        
+        System.out.println("Song not found in the playlist.");
+    }
+
+    // Move to the next song in the playlist
+    public void nextSong() {
+        if (size == 0) {
+            System.out.println("Playlist is empty.");
+            return;
+        }
+        currentSong = currentSong.next;
+        System.out.println("Now playing: " + currentSong.songName);
+    }
+
+    // Move to the previous song in the playlist
+    public void previousSong() {
+        if (size == 0) {
+            System.out.println("Playlist is empty.");
+            return;
+        }
+        currentSong = currentSong.prev;
+        System.out.println("Now playing: " + currentSong.songName);
+    }
+
+    // Display the current song and the entire playlist
+    public void displayPlaylist() {
+        if (size == 0) {
+            System.out.println("Playlist is empty.");
+            return;
+        }
+
+        SongNode current = currentSong;
+        System.out.println("Current song: " + currentSong.songName);
+        System.out.println("Playlist: ");
+        do {
+            System.out.println(current.songName);
+            current = current.next;
+        } while (current != currentSong);  // Loop through the list
+    }
+
+    // Main method to interact with the PlaylistManager via user input
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        PlaylistManager playlist = new PlaylistManager();
+
+        while (true) {
+            System.out.println("\n=== Music Playlist Manager ===");
+            System.out.println("1. Add a song");
+            System.out.println("2. Remove a song");
+            System.out.println("3. Show current song and playlist");
+            System.out.println("4. Move to next song");
+            System.out.println("5. Move to previous song");
+            System.out.println("6. Exit");
+
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter song name to add: ");
+                    String songToAdd = scanner.nextLine();
+                    playlist.addSong(songToAdd);
+                    break;
+
+                case 2:
+                    System.out.print("Enter song name to remove: ");
+                    String songToRemove = scanner.nextLine();
+                    playlist.removeSong(songToRemove);
+                    break;
+
+                case 3:
+                    playlist.displayPlaylist();
+                    break;
+
+                case 4:
+                    playlist.nextSong();
+                    break;
+
+                case 5:
+                    playlist.previousSong();
+                    break;
+
+                case 6:
+                    System.out.println("Exiting the playlist manager.");
+                    scanner.close();
+                    return;  // Exit the program
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+}
