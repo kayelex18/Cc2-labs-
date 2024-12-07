@@ -1,38 +1,49 @@
-//Claure, Kaye alexia R
-//CC2
-// COURSE TRACKER
-public class CC2CourseTracker {
+import java.util.Scanner;  // Import ng Scanner para sa input ng user
+
+public class CourseEnrollmentTracker {
+
     public static void main(String[] args) {
-        // Step 1: Create a one-dimensional array to store the names of 5 students.
-        String[] students = {"Darla", "Jabi", "Yen", "Jisi", "Naneng"};
-        
-        // Step 2: Create a two-dimensional array to store the grades of each student in 3 subjects.
-        // Rows represent students, and columns represent subjects (3 subjects in this case).
-        int[][] grades = {
-            {85, 90, 88},  // Daryll's' grades in 3 subjects
-            {78, 82, 84},  // Jabi's' grades
-            {92, 95, 93},  // Yen'sgrades
-            {70, 75, 80},  // Jisi's grades
-            {88, 92, 90}   // Naneng's grades
-        };
 
-        // Step 3: Calculate and display the average grade for each student.
-        for (int i = 0; i < students.length; i++) {
-            String student = students[i];
-            int[] studentGrades = grades[i];
-            double average = calculateAverage(studentGrades);
-            
-            // Format the average to 3 decimal places using String.format
-            System.out.println(student + "'s Average Grade: " + String.format("%.2f", average));
-        }
-    }
+        // Constants para sa bilang ng mga mag-aaral at asignatura
+        final int NUM_STUDENTS = 5;  // Bilang ng mga mag-aaral
+        final int NUM_SUBJECTS = 3;  // Bilang ng mga asignatura
 
-    // Method to calculate the average of grades for a student
-    public static double calculateAverage(int[] grades) {
-        int total = 0;
-        for (int grade : grades) {
-            total += grade;
+        // Paghahanda ng mga array para sa mga pangalan at grado
+        String[] studentNames = new String[NUM_STUDENTS];  // Array para sa mga pangalan ng mag-aaral
+        double[][] grades = new double[NUM_STUDENTS][NUM_SUBJECTS];  // 2D array para sa mga grado ng bawat mag-aaral
+
+        Scanner scanner = new Scanner(System.in);  // Paglikha ng Scanner para sa input ng user
+
+        // Pagkuha ng mga pangalan ng mag-aaral
+        for (int i = 0; i < NUM_STUDENTS; i++) {
+            System.out.print("Ilagay ang pangalan ng Mag-aaral " + (i + 1) + ": ");
+            studentNames[i] = scanner.nextLine();  // Basahin ang pangalan ng mag-aaral mula sa input
         }
-        return (double) total / grades.length;
+
+        // Pagkuha ng mga grado para sa bawat mag-aaral
+        for (int i = 0; i < NUM_STUDENTS; i++) {
+            System.out.println("Ilagay ang mga grado para kay " + studentNames[i] + ":");
+
+            for (int j = 0; j < NUM_SUBJECTS; j++) {
+                System.out.print("Grado para sa Asignatura " + (j + 1) + ": ");
+                grades[i][j] = scanner.nextDouble();  // Basahin ang grado mula sa input
+            }
+
+            scanner.nextLine();  // Konsumahin ang newline character pagkatapos ng double input
+        }
+
+        // Kalkulahin at ipakita ang average na grado para sa bawat mag-aaral
+        for (int i = 0; i < NUM_STUDENTS; i++) {
+            double sum = 0.0;  // Variable para sa total ng grado ng mag-aaral
+
+            for (int j = 0; j < NUM_SUBJECTS; j++) {
+                sum += grades[i][j];  // I-sum ang mga grado ng mag-aaral
+            }
+
+            double average = sum / NUM_SUBJECTS;  // Kalkulahin ang average na grado
+            System.out.printf("Average na grado para kay %s: %.2f%n", studentNames[i], average);  // Ipakita ang resulta
+        }
+
+        scanner.close();  // Isara ang Scanner upang i-release ang resources
     }
 }
