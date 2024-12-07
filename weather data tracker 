@@ -1,3 +1,9 @@
+/*
+Clauren, Kaye alexia R.
+September 25, 2024
+If else-id: Determines the largest number 
+*/
+
 import java.util.Scanner;
 
 public class WeatherDataTracker {
